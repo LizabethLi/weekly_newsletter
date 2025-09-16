@@ -25,7 +25,7 @@ class ArticleRecord:
 class NewsletterConfig:
     """Runtime configuration for newsletter generation."""
 
-    input_csv: Path
+    input_path: Path
     output_path: Path
     request_timeout: float = 30.0
     max_retries: int = 2

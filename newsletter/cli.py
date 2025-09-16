@@ -13,8 +13,14 @@ from .workflow import run_workflow
 
 
 def _build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Generate an AI newsletter from a CSV file.")
-    parser.add_argument("csv", type=Path, help="Path to the CSV file containing title and URL columns.")
+    parser = argparse.ArgumentParser(
+        description="Generate an AI newsletter from a TXT (URLs per line) or CSV input file."
+    )
+    parser.add_argument(
+        "input_file",
+        type=Path,
+        help="Path to the input file (TXT with one URL per line, or CSV with title/url columns).",
+    )
     parser.add_argument(
         "-o",
         "--output",
@@ -46,7 +52,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     logging.basicConfig(level=getattr(logging, args.log_level), format="%(levelname)s: %(message)s")
 
     config = NewsletterConfig(
-        input_csv=args.csv,
+        input_path=args.input_file,
         output_path=args.output,
         request_timeout=args.timeout,
         max_retries=args.retries,
